@@ -29,7 +29,12 @@ describe LRUCache do
         end
 
         it "ejects the LRU if cache size is reached" do
-            
+            my_cache.add(1)
+            my_cache.add(2)
+            my_cache.add(3)
+            my_cache.add(4)
+            my_cache.add(5)
+            expect(my_cache.show).to eq( [2,3,4,5] )
         end
     end
 

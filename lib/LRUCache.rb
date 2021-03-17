@@ -14,11 +14,17 @@ class LRUCache
 
     def add(el)
       # adds element to cache according to LRU principle
-      return @cache << el unless @cache.include?(el)
-
-      #el already in the cache
+      if @cache.include?(el)
         @cache.delete(el)
         @cache << el
+        return true
+      end
+
+      if lru_full? #and el not included, eject LRU
+        @cache.shift
+      end
+
+      @cache << el
     end
 
     def show
@@ -27,6 +33,8 @@ class LRUCache
     end
 
     private
-    # helper methods go here!
+    def lru_full?   
+        @cache.length == @cache_size
+    end
 
 end
